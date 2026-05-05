@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大会運営速報システム</title>
+<style>
+  body { font-family: 'Meiryo', sans-serif; background: #1a1a2e; color: #eee; margin: 0; padding: 20px; }
+  h1 { text-align: center; color: #f0c040; font-size: 28px; margin-bottom: 10px; }
+  .subtitle { text-align: center; color: #aaa; margin-bottom: 30px; font-size: 14px; }
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th { background: #2a2a4a; color: #f0c040; padding: 10px; border: 1px solid #444; }
+  td { padding: 10px; border: 1px solid #444; text-align: center; }
+  .status-waiting { background: #2a2a3a; }
+  .status-playing { background: #7a6000; color: #ffe080; font-weight: bold; }
+  .status-done    { background: #5a1a1a; color: #ff9090; }
+  .legend { display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; font-size: 13px; }
+  .legend span { padding: 4px 14px; border-radius: 4px; }
+  .l-playing { background: #7a6000; color: #ffe080; }
+  .l-done    { background: #5a1a1a; color: #ff9090; }
+  .l-wait    { background: #2a2a3a; color: #aaa; border: 1px solid #444; }
+  .updated   { text-align: center; color: #888; font-size: 12px; margin-top: 20px; }
+</style>
+</head>
+<body>
+<h1>大会運営速報システム</h1>
+<p class="subtitle">保手濱モデル　大会運営アプリ　テスト表示</p>
+
+<div class="legend">
+  <span class="l-playing">試合中</span>
+  <span class="l-done">終了</span>
+  <span class="l-wait">未開始</span>
+</div>
+
+<div class="table-wrap">
+<table>
+  <tr>
+    <th>試合番号</th>
+    <th>種目</th>
+    <th>コート</th>
+    <th>選手A</th>
+    <th>選手B</th>
+    <th>状態</th>
+  </tr>
+  <tr class="status-done">
+    <td>M001</td><td>男子シングルス</td><td>1</td><td>田中</td><td>鈴木</td><td>終了</td>
+  </tr>
+  <tr class="status-playing">
+    <td>M002</td><td>女子シングルス</td><td>2</td><td>佐藤</td><td>山田</td><td>試合中</td>
+  </tr>
+  <tr class="status-waiting">
+    <td>M003</td><td>男子ダブルス</td><td>3</td><td>高橋・伊藤</td><td>渡辺・中村</td><td>未開始</td>
+  </tr>
+  <tr class="status-waiting">
+    <td>M004</td><td>混合ダブルス</td><td>4</td><td>小林・加藤</td><td>吉田・山本</td><td>未開始</td>
+  </tr>
+</table>
+</div>
+
+<p class="updated">最終更新：テスト表示中</p>
+</body>
+</html>
