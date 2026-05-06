@@ -6,67 +6,65 @@
 <title>大会運営速報</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #111; color: #fff; font-family: 'Meiryo', sans-serif; }
-  h1 { text-align: center; color: #f0c040; font-size: 24px; padding: 10px 0 4px; }
-  .updated { text-align: center; color: #888; font-size: 12px; margin-bottom: 8px; }
-  .label { text-align: center; color: #f0c040; font-size: 16px; margin-bottom: 6px; }
-  .slide img { display: block; margin: 0 auto; max-width: 100%; max-height: 80vh; }
-  .dots { text-align: center; padding: 10px 0; }
-  .dot { display: inline-block; width: 10px; height: 10px; background: #555;
-         border-radius: 50%; margin: 0 4px; cursor: pointer; }
+  html, body { width: 100%; height: 100%; background: #111; overflow: hidden; font-family: 'Meiryo', sans-serif; }
+  .header { position: fixed; top: 0; left: 0; right: 0; height: 34px; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; z-index: 10; }
+  .header-title { color: #f0c040; font-size: 16px; }
+  .header-info { color: #888; font-size: 11px; }
+  .slide { position: fixed; top: 34px; left: 0; right: 0; bottom: 34px; display: none; align-items: center; justify-content: center; background: #111; }
+  .slide.active { display: flex; }
+  .slide img { max-width: 100%; max-height: 100%; object-fit: contain; }
+  .footer { position: fixed; bottom: 0; left: 0; right: 0; height: 34px; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; gap: 12px; z-index: 10; }
+  .dot { width: 8px; height: 8px; background: #555; border-radius: 50%; cursor: pointer; display: inline-block; }
   .dot.active { background: #f0c040; }
-  .nav { text-align: center; margin-top: 8px; }
-  .nav button { background: #333; color: #fff; border: 1px solid #555;
-                padding: 6px 20px; margin: 0 6px; font-size: 14px; cursor: pointer;
-                border-radius: 4px; }
-  .nav button:hover { background: #555; }
+  .footer button { background: #333; color: #fff; border: 1px solid #555; padding: 3px 14px; font-size: 12px; cursor: pointer; border-radius: 4px; }
+  .footer button:hover { background: #555; }
+  .page-info { color: #f0c040; font-size: 12px; min-width: 50px; text-align: center; }
 </style>
 </head>
 <body>
-<h1>大会運営速報システム　保手濱モデル</h1>
-<p class="updated">更新：2026年05月06日 10:36:11</p>
-<div class="slide" style="display:block;">
-  <p class="label">出力101　1 / 6</p>
+<div class="header">
+  <span class="header-title">大会運営速報システム　保手濱モデル</span>
+  <span class="header-info">更新：2026年05月06日 10:51:23</span>
+</div>
+
+<div class="slide">
   <img src="img/②③呉オープンミックス団体_出力101.png" alt="出力101" />
-</div><div class="slide" style="display:none;">
-  <p class="label">出力102　2 / 6</p>
+</div><div class="slide">
   <img src="img/②③呉オープンミックス団体_出力102.png" alt="出力102" />
-</div><div class="slide" style="display:none;">
-  <p class="label">出力103　3 / 6</p>
+</div><div class="slide">
   <img src="img/②③呉オープンミックス団体_出力103.png" alt="出力103" />
-</div><div class="slide" style="display:none;">
-  <p class="label">出力104　4 / 6</p>
+</div><div class="slide">
   <img src="img/②③呉オープンミックス団体_出力104.png" alt="出力104" />
-</div><div class="slide" style="display:none;">
-  <p class="label">出力101　5 / 6</p>
+</div><div class="slide">
   <img src="img/呉市民スポーツ大会_出力101.png" alt="出力101" />
-</div><div class="slide" style="display:none;">
-  <p class="label">出力102　6 / 6</p>
+</div><div class="slide">
   <img src="img/呉市民スポーツ大会_出力102.png" alt="出力102" />
 </div>
-<div class="dots">
-<span class='dot' onclick='goTo(0)'></span>
+
+<div class="footer">
+  <button onclick="prev()">◀ 前へ</button>
+  <span class="page-info" id="pageInfo">1 / 6</span>
+  <span class='dot' onclick='goTo(0)'></span>
 <span class='dot' onclick='goTo(1)'></span>
 <span class='dot' onclick='goTo(2)'></span>
 <span class='dot' onclick='goTo(3)'></span>
 <span class='dot' onclick='goTo(4)'></span>
 <span class='dot' onclick='goTo(5)'></span>
 
-</div>
-<div class="nav">
-  <button onclick="prev()">◀ 前へ</button>
   <button onclick="next()">次へ ▶</button>
 </div>
+
 <script>
 var current = 0;
 var total = 6;
 var timer;
 function goTo(n) {
-  document.querySelectorAll('.slide')[current].style.display = 'none';
+  document.querySelectorAll('.slide')[current].classList.remove('active');
   document.querySelectorAll('.dot')[current].classList.remove('active');
   current = (n + total) % total;
-  document.querySelectorAll('.slide')[current].style.display = 'block';
+  document.querySelectorAll('.slide')[current].classList.add('active');
   document.querySelectorAll('.dot')[current].classList.add('active');
+  document.getElementById('pageInfo').textContent = (current+1) + ' / ' + total;
   resetTimer();
 }
 function next() { goTo(current + 1); }
@@ -75,6 +73,7 @@ function resetTimer() {
   clearInterval(timer);
   timer = setInterval(function(){ goTo(current + 1); }, 15000);
 }
+document.querySelectorAll('.slide')[0].classList.add('active');
 document.querySelectorAll('.dot')[0].classList.add('active');
 resetTimer();
 </script>
