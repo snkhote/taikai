@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="30">
+
 <title>大会運営速報</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
@@ -18,20 +18,24 @@
   .dot.active { background:#f0c040; }
   .footer button { background:#f0c040; color:#111; border:none; padding:10px 40px; font-size:20px; font-weight:bold; cursor:pointer; border-radius:8px; }
   .footer button:hover { background:#ffd700; }
+  #toggleBtn { padding:10px 18px; font-size:15px; border-radius:8px; border:none; font-weight:bold; cursor:pointer; min-width:130px; }
+  #toggleBtn.auto { background:#4caf50; color:#fff; }
+  #toggleBtn.manual { background:#888; color:#fff; }
   .page-info { color:#f0c040; font-size:16px; font-weight:bold; min-width:70px; text-align:center; }
 </style>
 </head>
 <body>
 <div class="header">
   <span class="header-title">大会運営速報システム　保手濱モデル</span>
-  <span class="header-info">更新：2026年05月11日 11:21:09</span>
+  <span class="header-info">更新：2026年05月11日 22:28:37</span>
 </div>
-<div class='slide'><img src='img/0_②③呉オープンミックス団体_出力101.png?t=20260511112109' alt='出力101' /></div>
-<div class='slide'><img src='img/1_②③呉オープンミックス団体_出力102.png?t=20260511112109' alt='出力102' /></div>
-<div class='slide'><img src='img/2_②③呉オープンミックス団体_出力103.png?t=20260511112109' alt='出力103' /></div>
-<div class='slide'><img src='img/3_②③呉オープンミックス団体_出力104.png?t=20260511112109' alt='出力104' /></div>
+<div class='slide'><img src='img/0_②③呉オープンミックス団体_出力101.png?t=20260511222837' alt='出力101' /></div>
+<div class='slide'><img src='img/1_②③呉オープンミックス団体_出力102.png?t=20260511222837' alt='出力102' /></div>
+<div class='slide'><img src='img/2_②③呉オープンミックス団体_出力103.png?t=20260511222837' alt='出力103' /></div>
+<div class='slide'><img src='img/3_②③呉オープンミックス団体_出力104.png?t=20260511222837' alt='出力104' /></div>
 
 <div class="footer">
+  <button id="toggleBtn" class="auto" onclick="toggleRefresh()">🔄 自動更新 ON</button>
   <button onclick="prev()">◀ 前へ</button>
   <span class="page-info" id="pi">1 / 4</span>
   <span class='dot' onclick='goTo(0)'></span>
@@ -43,6 +47,21 @@
 </div>
 <script>
 var c=0,t=4;
+var autoRefresh=true;
+var refreshTimer=setInterval(function(){location.reload();},30000);
+function toggleRefresh(){
+  autoRefresh=!autoRefresh;
+  var btn=document.getElementById('toggleBtn');
+  if(autoRefresh){
+    refreshTimer=setInterval(function(){location.reload();},30000);
+    btn.textContent='🔄 自動更新 ON';
+    btn.className='auto';
+  } else {
+    clearInterval(refreshTimer);
+    btn.textContent='⏸ 手動更新';
+    btn.className='manual';
+  }
+}
 function goTo(n){
   document.querySelectorAll('.slide')[c].classList.remove('active');
   document.querySelectorAll('.dot')[c].classList.remove('active');
