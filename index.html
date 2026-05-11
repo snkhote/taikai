@@ -27,12 +27,12 @@
 <body>
 <div class="header">
   <span class="header-title">大会運営速報システム　保手濱モデル</span>
-  <span class="header-info">更新：2026年05月11日 22:56:16</span>
+  <span class="header-info">更新：2026年05月11日 23:02:42</span>
 </div>
-<div class='slide'><img src='img/0_②③呉オープンミックス団体_出力101.png?t=20260511225616' alt='出力101' /></div>
-<div class='slide'><img src='img/1_②③呉オープンミックス団体_出力102.png?t=20260511225616' alt='出力102' /></div>
-<div class='slide'><img src='img/2_②③呉オープンミックス団体_出力103.png?t=20260511225616' alt='出力103' /></div>
-<div class='slide'><img src='img/3_②③呉オープンミックス団体_出力104.png?t=20260511225616' alt='出力104' /></div>
+<div class='slide'><img src='img/0_②③呉オープンミックス団体_出力101.png?t=20260511230242' alt='出力101' /></div>
+<div class='slide'><img src='img/1_②③呉オープンミックス団体_出力102.png?t=20260511230242' alt='出力102' /></div>
+<div class='slide'><img src='img/2_②③呉オープンミックス団体_出力103.png?t=20260511230242' alt='出力103' /></div>
+<div class='slide'><img src='img/3_②③呉オープンミックス団体_出力104.png?t=20260511230242' alt='出力104' /></div>
 
 <div class="footer">
   <button id="toggleBtn" class="auto" onclick="toggleRefresh()">🔄 自動更新 ON</button>
@@ -49,7 +49,7 @@
 <script>
 var c=0,t=4;
 var autoRefresh=true;
-var refreshTimer=setInterval(function(){location.reload();},30000);
+var refreshTimer=setInterval(function(){location.href=location.pathname;},30000);
 // リロード後も手動モードを維持
 if(new URLSearchParams(location.search).get('manual')==='1'){
   autoRefresh=false;
@@ -62,7 +62,7 @@ function toggleRefresh(){
   autoRefresh=!autoRefresh;
   var btn=document.getElementById('toggleBtn');
   if(autoRefresh){
-    refreshTimer=setInterval(function(){location.reload();},30000);
+    refreshTimer=setInterval(function(){location.href=location.pathname;},30000);
     btn.textContent='🔄 自動更新 ON';
     btn.className='auto';
     document.getElementById('reloadBtn').style.display='none';
